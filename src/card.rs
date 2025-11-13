@@ -1,12 +1,12 @@
 
 #[derive(Copy, Clone)]
-struct Card {
+pub struct Card {
     suit: Suit,
     value: Value,
 }
 
 #[derive(Copy, Clone)]
-enum Suit {
+pub enum Suit {
     Spades,
     Hearts,
     Diamonds,
@@ -14,20 +14,20 @@ enum Suit {
 }
 
 #[derive(Copy, Clone)]
-enum Color {
+pub enum Color {
     Black,
     Red,
 }
 
 #[derive(Copy, Clone)]
-enum Value {
+pub enum Value {
     Ace,
     Number(u8),
     Face(FaceValue)
 }
 
 #[derive(Copy, Clone)]
-enum FaceValue {
+pub enum FaceValue {
     King,
     Queen,
     Jack,
