@@ -23,14 +23,9 @@ pub enum Color {
 pub enum Value {
     Ace,
     Number(u8),
-    Face(FaceValue)
-}
-
-#[derive(Copy, Clone)]
-pub enum FaceValue {
+    Jack,
     King,
     Queen,
-    Jack,
 }
 
 impl Card {
@@ -50,9 +45,9 @@ impl TryFrom<(u8, u8)> for Card {
             value: match value.0 {
                 1 => Value::Ace,
                 2_u8..=10_u8 => Value::Number(value.0),
-                11 => Value::Face(FaceValue::Jack),
-                12 => Value::Face(FaceValue::Queen),
-                13 => Value::Face(FaceValue::King),
+                11 => Value::Jack,
+                12 => Value::Queen,
+                13 => Value::King,
                 _ => return Err("Invalid card value"),
             },
             suit: match value.1 {
@@ -71,6 +66,15 @@ impl Suit {
         match self {
             Suit::Spades | Suit::Clubs => Color::Black,
             Suit::Diamonds | Suit::Hearts => Color::Red,
+        }
+    }
+}
+
+impl Value {
+    fn is_face(&self) -> bool {
+        match self {
+            Value::Jack | Value::Queen | Value::King => true,
+            _ => false,
         }
     }
 }
