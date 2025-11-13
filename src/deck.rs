@@ -1,3 +1,4 @@
+use crate::card::Card;
 
 // A pile of an arbitrary number of cards
 struct Pile {
@@ -43,7 +44,3 @@ impl Iterator for Pile {
         self.cards.get(self.index).map(|c| *c)
     }
 }
-
-#[derive(Copy, Clone)]
-// temporary
-struct Card {}
