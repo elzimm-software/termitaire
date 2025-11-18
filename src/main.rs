@@ -1,5 +1,5 @@
 mod card;
-mod deck;
+mod pile;
 
 fn main() {
     println!("Hello, world!");
