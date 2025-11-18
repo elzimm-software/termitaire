@@ -19,8 +19,19 @@ impl Pile {
     pub fn from<T: TryInto<Card, Error: Debug> + Copy>(cards: Vec<T>) -> Self {
         Self {
             cards: cards.iter().map(|&x| x.try_into().unwrap()).collect(),
-            index: 0,
+            index: cards.len(),
         }
+    }
+
+    pub fn deck52() -> Self {
+        let mut vec: Vec<Card> = Vec::new();
+        for s in 1..=4 {
+            for v in 1..=13 {
+                vec.push((v, s).try_into().unwrap())
+            }
+        }
+
+        Self::from(vec)
     }
 
     // put card on top of pile
