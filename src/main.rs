@@ -1,4 +1,4 @@
-#[allow(unused)] // Remove before release
+#![allow(dead_code)] // Remove before release
 
 mod card;
 mod pile;
