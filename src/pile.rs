@@ -31,6 +31,10 @@ impl Pile {
         self.index -= 1;
         self.cards.pop().unwrap()
     }
+
+    fn top(&self) -> &Card {
+        self.cards.last().unwrap()
+    }
 }
 
 impl Iterator for Pile {
