@@ -1,3 +1,5 @@
+use std::fmt::Debug;
+
 use crate::card::Card;
 
 // A pile of an arbitrary number of cards
@@ -10,6 +12,13 @@ impl Pile {
     pub fn new() -> Self {
         Pile {
             cards: Vec::new(),
+            index: 0,
+        }
+    }
+
+    pub fn from<T: TryInto<Card, Error: Debug> + Copy>(cards: Vec<T>) -> Self {
+        Self {
+            cards: cards.iter().map(|&x| x.try_into().unwrap()).collect(),
             index: 0,
         }
     }
