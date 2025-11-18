@@ -1,3 +1,5 @@
+#[allow(unused)] // Remove before release
+
 mod card;
 mod pile;
 
