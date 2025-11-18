@@ -1,13 +1,13 @@
 use crate::card::Card;
 
 // A pile of an arbitrary number of cards
-struct Pile {
+pub struct Pile {
     cards: Vec<Card>,
     index: usize,
 }
 
 impl Pile {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Pile {
             cards: Vec::new(),
             index: 0,
@@ -15,25 +15,23 @@ impl Pile {
     }
 
     // put card on top of pile
-    fn place_top(&mut self, card: Card) {
+    pub fn place_top(&mut self, card: Card) {
         self.index += 1;
         self.cards.push(card);
     }
 
     // put card on bottom of pile
-    fn place_bottom(&mut self, card: Card) {
+    pub fn place_bottom(&mut self, card: Card) {
         self.index += 1;
         self.cards.insert(0, card);
     }
 
     // draw card from top of pile
-    fn draw(&mut self) -> Card {
+    pub fn draw(&mut self) -> Card {
         self.index -= 1;
         self.cards.pop().unwrap()
     }
 
-    fn top(&self) -> &Card {
-        self.cards.last().unwrap()
     }
 }
 
