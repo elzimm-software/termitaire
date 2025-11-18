@@ -29,9 +29,12 @@ impl Pile {
     // draw card from top of pile
     pub fn draw(&mut self) -> Card {
         self.index -= 1;
-        self.cards.pop().unwrap()
+        self.cards.remove(self.index + 1)
     }
 
+    // peek at top card in pile
+    pub fn top(&self) -> &Card {
+        self.cards.get(self.index).unwrap()
     }
 }
 
