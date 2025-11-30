@@ -1,18 +1,25 @@
-use std::fmt::Debug;
+mod straight;
+mod cascade;
+mod flippable;
 
+use std::fmt::Debug;
+use ratatui::buffer::Buffer;
+use ratatui::layout::Rect;
 use crate::card::Card;
 
 // A pile of an arbitrary number of cards
-pub struct Pile {
+pub struct Pile<'a> {
     cards: Vec<Card>,
     index: usize,
+    renderer: Option<Box<dyn Renderer + 'a>>
 }
 
-impl Pile {
+impl<'a> Pile<'a> {
     pub fn new() -> Self {
         Pile {
             cards: Vec::new(),
             index: 0,
+            renderer: None,
         }
     }
 
@@ -20,6 +27,14 @@ impl Pile {
         Self {
             cards: cards.iter().map(|&x| x.try_into().unwrap()).collect(),
             index: cards.len(),
+            renderer: None,
+        }
+    }
+
+    pub fn render_as<R: Renderer + 'a>(self, renderer: R) -> Self {
+        Self {
+            renderer: Some(Box::new(renderer)),
+            ..self
         }
     }
 
@@ -58,7 +73,13 @@ impl Pile {
     }
 }
 
-impl Iterator for Pile {
+impl Clone for Pile<'_> {
+    fn clone(&self) -> Self {
+        todo!()
+    }
+}
+
+impl Iterator for Pile<'_> {
     type Item = Card;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -68,4 +89,14 @@ impl Iterator for Pile {
         self.index -= 1;
         self.cards.get(self.index).map(|c| *c)
     }
+}
+
+trait Renderer: {
+    fn render(&self, pile: &Pile, area: Rect, buf: &mut Buffer);
+}
+
+pub mod render_type {
+    pub use super::cascade::Cascade;
+    pub use super::flippable::Flippable;
+    pub use super::straight::Straight;
 }
