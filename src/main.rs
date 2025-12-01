@@ -1,8 +1,9 @@
-#![allow(dead_code)] // Remove before release
+#![allow(dead_code, unused_variables)] // Remove before release
 
 mod card;
 mod pile;
 mod table;
+mod state;
 
 fn main() {
     println!("Hello, world!");
