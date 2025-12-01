@@ -27,7 +27,7 @@ impl<'a> Pile<'a> {
     pub fn from<T: TryInto<Card, Error: Debug> + Copy>(cards: Vec<T>) -> Self {
         Self {
             cards: cards.iter().map(|&x| x.try_into().unwrap()).collect(),
-            index: cards.len() - 1,
+            index: cards.len(),
             renderer: None,
         }
     }
@@ -66,12 +66,12 @@ impl<'a> Pile<'a> {
     // draw card from top of pile
     pub fn draw(&mut self) -> Card {
         self.index -= 1;
-        self.cards.remove(self.index + 1)
+        self.cards.remove(self.index - 1)
     }
 
     // peek at top card in pile
     pub fn top(&self) -> &Card {
-        self.cards.get(self.index).unwrap()
+        self.cards.get(self.index - 1).unwrap()
     }
 }
 
