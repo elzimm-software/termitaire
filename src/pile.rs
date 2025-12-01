@@ -27,7 +27,7 @@ impl<'a> Pile<'a> {
     pub fn from<T: TryInto<Card, Error: Debug> + Copy>(cards: Vec<T>) -> Self {
         Self {
             cards: cards.iter().map(|&x| x.try_into().unwrap()).collect(),
-            index: cards.len(),
+            index: cards.len() - 1,
             renderer: None,
         }
     }
