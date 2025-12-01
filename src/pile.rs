@@ -5,6 +5,7 @@ mod flippable;
 use std::fmt::Debug;
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
+use ratatui::widgets::Widget;
 use crate::card::Card;
 
 // A pile of an arbitrary number of cards
@@ -31,6 +32,7 @@ impl<'a> Pile<'a> {
         }
     }
 
+    #[allow(private_bounds)]
     pub fn render_as<R: Renderer + 'a>(self, renderer: R) -> Self {
         Self {
             renderer: Some(Box::new(renderer)),
@@ -70,6 +72,17 @@ impl<'a> Pile<'a> {
     // peek at top card in pile
     pub fn top(&self) -> &Card {
         self.cards.get(self.index).unwrap()
+    }
+}
+
+impl Widget for Pile<'_> {
+    fn render(self, area: Rect, buf: &mut Buffer)
+    where
+        Self: Sized
+    {
+        if let Some(renderer) = &self.renderer {
+            renderer.render(&self, area, buf);
+        }
     }
 }
 
