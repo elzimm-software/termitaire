@@ -1,3 +1,4 @@
+use std::fmt::Debug;
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
 use crate::pile::{Pile, Renderer};
@@ -11,6 +12,12 @@ impl Cascade {
         Self {
             n_hidden,
         }
+    }
+}
+
+impl Debug for Cascade {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Cascade").field("n_hidden", &self.n_hidden).finish()
     }
 }
 

@@ -1,4 +1,4 @@
-use std::array::from_fn;
+use std::{array::from_fn, fmt::Debug};
 use crate::pile::Pile;
 use crate::pile::render_type::{Cascade, Flippable, Straight};
 
@@ -24,5 +24,11 @@ impl Table<'_> {
             home: from_fn(|_| Pile::new().render_as(Straight)),
             draw: deck.render_as(Flippable),
         }
+    }
+}
+
+impl Debug for Table<'_> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Table").field("stacks", &self.stacks).field("home", &self.home).field("draw", &self.draw).finish()
     }
 }

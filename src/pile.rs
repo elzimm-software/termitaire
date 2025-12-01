@@ -104,7 +104,13 @@ impl Iterator for Pile<'_> {
     }
 }
 
-trait Renderer: {
+impl Debug for Pile<'_> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Pile").field("cards", &self.cards).field("index", &self.index).field("renderer", &self.renderer).finish()
+    }
+}
+
+trait Renderer: Debug {
     fn render(&self, pile: &Pile, area: Rect, buf: &mut Buffer);
 }
 
