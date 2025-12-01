@@ -6,5 +6,6 @@ mod table;
 mod state;
 
 fn main() {
-    println!("Hello, world!");
+    let table = table::Table::new();
+    println!("{:#?}", table);
 }
