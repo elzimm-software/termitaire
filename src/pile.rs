@@ -8,7 +8,7 @@ use ratatui::layout::Rect;
 use ratatui::widgets::Widget;
 use crate::card::Card;
 
-// A pile of an arbitrary number of cards
+/// A pile of an arbitrary number of cards
 pub struct Pile<'a> {
     cards: Vec<Card>,
     index: usize,
