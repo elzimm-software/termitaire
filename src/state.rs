@@ -45,6 +45,7 @@ impl State {
     }
 }
 
+/// Automate calling [ratatui::restore()] when State is dropped.
 impl Drop for State {
     fn drop(&mut self) {
         ratatui::restore();
