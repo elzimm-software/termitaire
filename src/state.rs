@@ -42,9 +42,10 @@ impl State {
     fn handle_events(&mut self) -> io::Result<()> {
         todo!()
     }
+}
 
-    /// Restore the terminal to its initial state.
-    pub fn restore() {
+impl Drop for State {
+    fn drop(&mut self) {
         ratatui::restore();
     }
 }
