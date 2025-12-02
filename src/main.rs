@@ -6,7 +6,7 @@
 //! Playing on a trackpad is tedious and using a touchscreen becomes tiring, so why not use just the keyboard?
 //! Of course TUI Solitaire exists, as does ratpoisoned Solitaire.
 //! But they require painstakingly selecting cards with the arrow keys.
-//! That simply wont fly here, every interface can, and should, use Vimmic motions.
+//! That simply won't fly here, every interface can, and should, use Vimmic motions.
 //!
 //! Each pile is assigned a key, pressing the key selects the top card on the pile.
 //! Repeated presses cycles through the selectable cards on the pile.
