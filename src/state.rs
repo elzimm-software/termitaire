@@ -7,10 +7,12 @@ use ratatui::{DefaultTerminal, Frame};
 ///
 /// Example
 /// ```rust
+/// # use std::io;
+/// # use termitaire_lib::state::State;
 /// let mut terminal = ratatui::init();
 /// let mut state = State::new();
-/// state.run(&terminal)?;
-/// state.restore();
+/// state.run(&mut terminal)?;
+/// State::restore();
 /// # Ok::<(), io::Error>(())
 /// ```
 pub struct State {
@@ -19,11 +21,6 @@ pub struct State {
 
 impl State {
     /// Initialize state.
-    ///
-    /// Example
-    /// ```rust
-    /// let mut state = State::new();
-    /// ```
     pub fn new() -> Self {
         Self {
             exit: false,
