@@ -22,10 +22,12 @@ impl State {
     }
 
     pub fn draw(&self, frame: &mut Frame) {
+    fn draw(&self, frame: &mut Frame) {
         todo!()
     }
 
     pub fn handle_events(&mut self) -> io::Result<()> {
+    fn handle_events(&mut self) -> io::Result<()> {
         todo!()
     }
 
