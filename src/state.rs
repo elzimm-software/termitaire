@@ -14,7 +14,7 @@ pub struct State {
 
 impl State {
     /// Initialize state.
-    pub fn new() -> Self {
+    pub fn init() -> Self {
         Self {
             terminal: RefCell::new(ratatui::init()),
             exit: false,
