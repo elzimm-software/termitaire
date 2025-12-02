@@ -10,11 +10,6 @@ pub struct State {
 
 impl State {
     /// Initialize state.
-    ///
-    /// Example
-    /// ```rust
-    /// let mut state = State::new();
-    /// ```
     pub fn new() -> Self {
         Self {
             exit: false,
