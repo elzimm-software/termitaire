@@ -4,15 +4,6 @@ use ratatui::{DefaultTerminal, Frame};
 /// Application state and event handling
 ///
 /// Provides a wrapper around [ratatui].
-///
-/// Example
-/// ```rust
-/// let mut terminal = ratatui::init();
-/// let mut state = State::new();
-/// state.run(&terminal)?;
-/// state.restore();
-/// # Ok::<(), io::Error>(())
-/// ```
 pub struct State {
     exit: bool,
 }
@@ -33,8 +24,6 @@ impl State {
     /// Enter into rendering and event handling loop.
     ///
     /// Use [ratatui::init()] to get the [DefaultTerminal].
-    ///
-
     pub fn run(&mut self, terminal: &mut DefaultTerminal) -> io::Result<()> {
         while !self.exit {
             terminal.draw(|frame| self.draw(frame))?;
