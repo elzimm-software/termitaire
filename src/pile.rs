@@ -9,6 +9,16 @@ use ratatui::widgets::Widget;
 use crate::card::Card;
 
 /// A pile of an arbitrary number of cards
+///
+/// Cards can be placed onto the top or bottom.
+/// A pile can also be used as an iterator to non-destructively cycle through the cards from top to bottom.
+///
+/// The renderer determines how the cards are drawn:
+///  - [Flippable](render_type::Flippable) renders two stacks side by side and shows cards being flipped from one onto the other.
+///  - [Cascade](render_type::Cascade) renders each card partially overlapping with `n_hidden` appearing only as a card back.
+///  - [Straight](render_type::Straight) renders a single stack.
+//
+// TODO: Ensure proper behavior when inserting while being used as a iterator.
 pub struct Pile<'a> {
     cards: Vec<Card>,
     index: usize,
@@ -16,6 +26,7 @@ pub struct Pile<'a> {
 }
 
 impl<'a> Pile<'a> {
+    /// Create an empty Pile.
     pub fn new() -> Self {
         Pile {
             cards: Vec::new(),
@@ -25,6 +36,7 @@ impl<'a> Pile<'a> {
     }
 
     pub fn from<T: TryInto<Card, Error: Debug> + Copy>(cards: Vec<T>) -> Self {
+    /// Create a new pile from the given `Into<Vec>`.
         Self {
             cards: cards.iter().map(|&x| x.try_into().unwrap()).collect(),
             index: cards.len(),
@@ -32,6 +44,10 @@ impl<'a> Pile<'a> {
         }
     }
 
+    /// Set the rendering strategy.
+    ///  - [Flippable](render_type::Flippable) renders two stacks side by side and shows cards being flipped from one onto the other.
+    ///  - [Cascade](render_type::Cascade) renders each card partially overlapping with `n_hidden` appearing only as a card back.
+    ///  - [Straight](render_type::Straight) renders a single stack.
     #[allow(private_bounds)]
     pub fn render_as<R: Renderer + 'a>(self, renderer: R) -> Self {
         Self {
@@ -40,10 +56,13 @@ impl<'a> Pile<'a> {
         }
     }
 
+    /// Generates a new 52 card deck.
     pub fn deck52() -> Self {
         let mut vec: Vec<Card> = Vec::new();
+        // iterate over suits
         for s in 1..=4 {
             for v in 1..=13 {
+            // iterate over values
                 vec.push((v, s).try_into().unwrap())
             }
         }
@@ -53,17 +72,22 @@ impl<'a> Pile<'a> {
 
     // put card on top of pile
     pub fn place_top(&mut self, card: Card) {
+    /// Put card on top of pile.
+    ///
+    /// This places the card on the current top of the pile.
+    /// If the pile is being iterated through the top will change.
         self.index += 1;
         self.cards.push(card);
     }
 
     // put card on bottom of pile
     pub fn place_bottom(&mut self, card: Card) {
+    /// Put card on bottom of pile.
         self.index += 1;
         self.cards.insert(0, card);
     }
 
-    // draw card from top of pile
+    /// draw card from top of pile.
     pub fn draw(&mut self) -> Card {
         self.index -= 1;
         self.cards.remove(self.index - 1)
