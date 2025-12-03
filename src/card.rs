@@ -1,11 +1,11 @@
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
 pub struct Card {
     suit: Suit,
     value: Value,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
 pub enum Suit {
     Spades,
     Hearts,
@@ -19,7 +19,7 @@ pub enum Color {
     Red,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
 pub enum Value {
     Ace,
     Number(u8),
