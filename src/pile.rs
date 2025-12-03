@@ -35,11 +35,12 @@ impl<'a> Pile<'a> {
         }
     }
 
-    pub fn from<T: TryInto<Card, Error: Debug> + Copy>(cards: Vec<T>) -> Self {
     /// Create a new pile from the given `Into<Vec>`.
+    pub fn from<V: Into<Vec<T>>, T: TryInto<Card, Error: Debug> + Copy>(cards: V) -> Self {
+        let vec = cards.into();
         Self {
-            cards: cards.iter().map(|&x| x.try_into().unwrap()).collect(),
-            index: cards.len(),
+            cards: vec.iter().map(|&x| x.try_into().unwrap()).collect(),
+            index: vec.len(),
             renderer: None,
         }
     }
@@ -61,8 +62,8 @@ impl<'a> Pile<'a> {
         let mut vec: Vec<Card> = Vec::new();
         // iterate over suits
         for s in 1..=4 {
-            for v in 1..=13 {
             // iterate over values
+            for v in (1..=13).rev() {
                 vec.push((v, s).try_into().unwrap())
             }
         }
@@ -70,27 +71,25 @@ impl<'a> Pile<'a> {
         Self::from(vec)
     }
 
-    // put card on top of pile
-    pub fn place_top(&mut self, card: Card) {
     /// Put card on top of pile.
     ///
     /// This places the card on the current top of the pile.
     /// If the pile is being iterated through the top will change.
+    pub fn place_top<T: TryInto<Card, Error: Debug> + Copy>(&mut self, card: T) {
+        self.cards.insert(self.index, card.try_into().unwrap());
         self.index += 1;
-        self.cards.push(card);
     }
 
-    // put card on bottom of pile
-    pub fn place_bottom(&mut self, card: Card) {
     /// Put card on bottom of pile.
+    pub fn place_bottom<T: TryInto<Card, Error: Debug> + Copy>(&mut self, card: T) {
+        self.cards.insert(0, card.try_into().unwrap());
         self.index += 1;
-        self.cards.insert(0, card);
     }
 
     /// draw card from top of pile.
     pub fn draw(&mut self) -> Card {
         self.index -= 1;
-        self.cards.remove(self.index - 1)
+        self.cards.remove(self.index)
     }
 
     // peek at top card in pile
