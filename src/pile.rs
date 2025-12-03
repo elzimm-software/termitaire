@@ -142,3 +142,27 @@ pub mod render_type {
     pub use super::flippable::Flippable;
     pub use super::straight::Straight;
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_place_top() {
+        let first_check = Pile::from(vec![(1,1),(2,1),(4,1),(3,1)]);
+        let second_check = Pile::from(vec![(1,1),(2,1),(3,1),(4,1)]);
+        let mut pile = Pile::from(vec![(1,1),(2,1),(4,1)]);
+        pile.place_top((3,1));
+        println!("{:?}", pile);
+        for i in 0..4 {
+            assert_eq!(pile.cards[i], first_check.cards[i])
+        }
+        let _ = pile.draw();
+        let _ = pile.next();
+        pile.place_top((3,1));
+        println!("{:?}", pile);
+        for i in 0..4 {
+            assert_eq!(pile.cards[i], second_check.cards[i])
+        }
+    }
+}
