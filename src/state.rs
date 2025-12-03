@@ -5,8 +5,8 @@ use ratatui::{DefaultTerminal, Frame};
 /// Application state and event handling
 ///
 /// Provides a wrapper around [ratatui].
-/// `terminal` is in a RefCell to avoid some nasty borrow checker gunk in [run()].
-/// I don't fully know why it works, but it does and that's good enough for me.
+// `terminal` is in a RefCell to avoid some nasty borrow checker gunk in run().
+// I don't fully know why it works, but it does and that's good enough for me.
 pub struct State {
     terminal: RefCell<DefaultTerminal>,
     exit: bool,
@@ -22,8 +22,6 @@ impl State {
     }
 
     /// Enter into rendering and event handling loop.
-    ///
-    /// Use [ratatui::init()] to get the [DefaultTerminal].
     pub fn run(&mut self) -> io::Result<()> {
         // core game loop
         while !self.exit {
