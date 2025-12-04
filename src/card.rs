@@ -5,29 +5,6 @@ pub struct Card {
     value: Value,
 }
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
-pub enum Suit {
-    Spades,
-    Hearts,
-    Diamonds,
-    Clubs,
-}
-
-#[derive(Copy, Clone, Debug)]
-pub enum Color {
-    Black,
-    Red,
-}
-
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
-pub enum Value {
-    Ace,
-    Number(u8),
-    Jack,
-    King,
-    Queen,
-}
-
 impl Card {
     pub fn new(value: Value, suit: Suit) -> Self {
         Self {
@@ -61,6 +38,14 @@ impl TryFrom<(u8, u8)> for Card {
     }
 }
 
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
+pub enum Suit {
+    Spades,
+    Hearts,
+    Diamonds,
+    Clubs,
+}
+
 impl Suit {
     fn get_color(&self) -> Color {
         match self {
@@ -68,6 +53,21 @@ impl Suit {
             Suit::Diamonds | Suit::Hearts => Color::Red,
         }
     }
+}
+
+#[derive(Copy, Clone, Debug)]
+pub enum Color {
+    Black,
+    Red,
+}
+
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
+pub enum Value {
+    Ace,
+    Number(u8),
+    Jack,
+    King,
+    Queen,
 }
 
 impl Value {
