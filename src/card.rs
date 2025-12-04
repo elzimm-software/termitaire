@@ -29,7 +29,7 @@ pub enum Value {
 }
 
 impl Card {
-    fn new(value: Value, suit: Suit) -> Self {
+    pub fn new(value: Value, suit: Suit) -> Self {
         Self {
             value,
             suit,
