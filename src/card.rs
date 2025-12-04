@@ -56,10 +56,10 @@ impl TryFrom<(u8, u8)> for Card {
 /// Enum of possible card suits.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
 pub enum Suit {
-    Spades,
-    Hearts,
-    Diamonds,
-    Clubs,
+    Spades = 4,
+    Hearts = 3,
+    Diamonds = 2,
+    Clubs = 1,
 }
 
 impl Suit {
