@@ -17,8 +17,6 @@ use crate::card::Card;
 ///  - [Flippable](render_type::Flippable) renders two stacks side by side and shows cards being flipped from one onto the other.
 ///  - [Cascade](render_type::Cascade) renders each card partially overlapping with `n_hidden` appearing only as a card back.
 ///  - [Straight](render_type::Straight) renders a single stack.
-//
-// TODO: Ensure proper behavior when inserting while being used as a iterator.
 pub struct Pile<'a> {
     cards: Vec<Card>,
     index: usize,
