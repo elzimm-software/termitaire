@@ -139,6 +139,11 @@ pub mod render_type {
     pub use super::cascade::Cascade;
     pub use super::flippable::Flippable;
     pub use super::straight::Straight;
+
+    const SPADES: char = '\u{2660}';
+    const HEARTS: char = '\u{2665}';
+    const DIAMONDS: char = '\u{2666}';
+    const CLUBS: char = '\u{2663}';
 }
 
 #[cfg(test)]
