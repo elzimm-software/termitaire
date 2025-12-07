@@ -3,6 +3,17 @@ use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
 use crate::pile::{Pile, Renderer};
 
+/// Draws a [Pile] as a single stack.
+///
+/// ```text
+/// ┌─────────┐
+/// │A♠       │
+/// │         │
+/// |         |
+/// │         │
+/// │       A♠│
+/// └─────────┘
+/// ```
 pub struct Straight;
 
 impl Debug for Straight {
