@@ -117,8 +117,7 @@ impl Index<usize> for Pile<'_> {
         if index >= self.cards.len() {
             panic!("Index {} out of bounds.", index);
         }
-        // redundant cards length addition and subtraction prevents unsigned integer underflow
-        &self.cards[((index + self.cards.len()) - (self.cards.len() - self.index)) % self.cards.len()]
+        &self.cards[(index + self.index) % self.cards.len()]
     }
 }
 
