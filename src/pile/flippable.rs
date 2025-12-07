@@ -3,6 +3,17 @@ use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
 use crate::pile::{Pile, Renderer};
 
+/// Draws a [Pile] as two stacks side by side and shows cards being flipped from one onto the other.
+///
+/// ```text
+/// ┌─────────┐ ┌──┌──┌─────────┐
+/// │░░░░░░░░░│ |A♠|2♠|3♠       │
+/// │▒▒▒▒▒▒▒▒▒│ |  |  |         │
+/// │░░░░░░░░░│ |  |  |         │
+/// │▒▒▒▒▒▒▒▒▒│ |  |  |         │
+/// │░░░░░░░░░│ |  |  |       3♠│
+/// └─────────┘ └──└──└─────────┘
+/// ```
 pub struct Flippable;
 
 impl Debug for Flippable {
