@@ -4,34 +4,26 @@
 /// The primary duty of this struct is to handle comparisons between [cards](Card).
 /// I haven't yet decided if I want [cards](Card) to know how to render themselves
 /// or if I can leave that to the [Pile](crate::pile::Pile) rendering strategies.
-//
-// Card rendering ideas:
-// Card front
-// ┌─────────┐
-// │A♠       │
-// │         │
-// |         |
-// │         │
-// │       A♠│
-// └─────────┘
-//
-// Card back
-// ┌─────────┐
-// │▓▒▓▒▓▒▓▒▓│
-// │▒▓▒▓▒▓▒▓▒│
-// │▓▒▓▒▓▒▓▒▓│
-// │▒▓▒▓▒▓▒▓▒│
-// │▓▒▓▒▓▒▓▒▓│
-// └─────────┘
-//
-// Alternate card back
-// ┌─────────┐
-// │░░░░░░░░░│
-// │▒▒▒▒▒▒▒▒▒│
-// │░░░░░░░░░│
-// │▒▒▒▒▒▒▒▒▒│
-// │░░░░░░░░░│
-// └─────────┘
+///
+/// ```text
+/// Card front
+/// ┌─────────┐
+/// │A♠       │
+/// │         │
+/// |         |
+/// │         │
+/// │       A♠│
+/// └─────────┘
+///
+/// Card back
+/// ┌─────────┐
+/// │░░░░░░░░░│
+/// │▒▒▒▒▒▒▒▒▒│
+/// │░░░░░░░░░│
+/// │▒▒▒▒▒▒▒▒▒│
+/// │░░░░░░░░░│
+/// └─────────┘
+/// ```
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Ord, PartialOrd)]
 pub struct Card {
