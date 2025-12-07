@@ -14,6 +14,7 @@ use crate::pile::{Pile, Renderer};
 /// │░░░░░░░░░│ |  |  |       3♠│
 /// └─────────┘ └──└──└─────────┘
 /// ```
+#[derive(Clone, Copy)]
 pub struct Flippable;
 
 impl Debug for Flippable {

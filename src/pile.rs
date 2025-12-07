@@ -4,9 +4,7 @@ mod flippable;
 
 use std::fmt::Debug;
 use std::ops::Index;
-use ratatui::buffer::Buffer;
-use ratatui::layout::Rect;
-use ratatui::widgets::Widget;
+use ratatui::{buffer::Buffer, layout::Rect, widgets::Widget};
 use crate::card::Card;
 
 /// A pile of an arbitrary number of cards
@@ -118,12 +116,6 @@ impl Index<usize> for Pile<'_> {
             panic!("Index {} out of bounds.", index);
         }
         &self.cards[(index + self.index) % self.cards.len()]
-    }
-}
-
-impl Clone for Pile<'_> {
-    fn clone(&self) -> Self {
-        todo!()
     }
 }
 

@@ -21,6 +21,7 @@ use crate::pile::{Pile, Renderer};
 /// │       K♥│
 /// └─────────┘
 /// ```
+#[derive(Clone, Copy)]
 pub struct Cascade {
     n_hidden: usize,
 }

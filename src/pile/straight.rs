@@ -14,6 +14,7 @@ use crate::pile::{Pile, Renderer};
 /// │       A♠│
 /// └─────────┘
 /// ```
+#[derive(Clone, Copy)]
 pub struct Straight;
 
 impl Debug for Straight {
