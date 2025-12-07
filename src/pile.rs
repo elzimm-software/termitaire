@@ -3,6 +3,7 @@ mod cascade;
 mod flippable;
 
 use std::fmt::Debug;
+use std::ops::Index;
 use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
 use ratatui::widgets::Widget;
@@ -107,6 +108,20 @@ impl Widget for Pile<'_> {
     }
 }
 
+/// Computes returned position as if the current `self.index` is the top of the pile
+/// and all [Cards](Card) above it are at the bottom of the pile.
+impl Index<usize> for Pile<'_> {
+    type Output = Card;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        if index >= self.cards.len() {
+            panic!("Index {} out of bounds.", index);
+        }
+        // redundant cards length addition and subtraction prevents unsigned integer underflow
+        &self.cards[((index + self.cards.len()) - (self.cards.len() - self.index)) % self.cards.len()]
+    }
+}
+
 impl Clone for Pile<'_> {
     fn clone(&self) -> Self {
         todo!()
@@ -167,5 +182,17 @@ mod tests {
         for i in 0..4 {
             assert_eq!(pile.cards[i], second_check.cards[i])
         }
+    }
+
+    #[test]
+    fn index_impl() {
+        let mut pile  = Pile::from(vec![(1,1), (2,1), (3,1), (4,1)]);
+        dbg!(pile.index);
+        assert_eq!(pile[3], (4,1).try_into().unwrap());
+        let _ = pile.next();
+        dbg!(pile.index);
+        assert_eq!(pile[3], (3,1).try_into().unwrap());
+        dbg!(pile.index);
+        assert_eq!(pile[0], (4,1).try_into().unwrap());
     }
 }
